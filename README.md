@@ -18,3 +18,12 @@
     </pluginRepository>
 </pluginRepositories>
 ```
+
+### Gradle 下载地址
+
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-9.4.1-bin.zip
+# distributionUrl=https\://mirrors.aliyun.com/gradle/gradle-9.4.1-bin.zip
+# distributionUrl=https\://mirrors.aliyun.com/macports/distfiles/gradle/gradle-9.4.1-bin.zip
+# distributionUrl=https\://mirrors.cloud.tencent.com/gradle/gradle-9.4.1-bin.zip
+```
