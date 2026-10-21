@@ -49,3 +49,34 @@ dependencies {
     developmentOnly 'io.netty:netty-all'
 }
 ```
+
+### 本地 MySQL 部署 `compose.yaml`
+
+```yaml
+name: containers
+
+services:
+
+  containers-mysql:
+    image: mysql:9.7.2
+    container_name: containers-mysql
+    hostname: containers-mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/var/lib/mysql'
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: 2G
+
+volumes:
+  mysql_data:
+    name: containers.mysql.data
+    driver: local
+```
+
