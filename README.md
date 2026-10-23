@@ -54,72 +54,34 @@ dependencies {
 
 ```yaml
 name: development
-
 services:
-
   development-mysql:
-    image: mysql:latest
-    container_name: development-mysql
-    hostname: development-mysql
+    image: 'mysql:8.4'
     restart: unless-stopped
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - 'MYSQL_DATABASE=development'
+      - 'MYSQL_PASSWORD=development'
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_USER=development'
+      - 'TZ=Asia/Shanghai'
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
-      - 'mysql_data:/var/lib/mysql'
-
+      - 'mysql-data:/var/lib/mysql'
   development-redis:
-    image: redis:latest
-    container_name: development-redis
-    hostname: development-redis
+    image: 'redis:7.4'
     restart: unless-stopped
     ports:
       - '6379:6379'
     volumes:
-      - 'redis_data:/data'
-
-  development-rabbitmq:
-    image: rabbitmq:management
-    container_name: development-rabbitmq
-    hostname: development-rabbitmq
-    restart: unless-stopped
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - "rabbitmq_data:/var/lib/rabbitmq"
-
-  development-zookeeper:
-    image: zookeeper:latest
-    container_name: development-zookeeper
-    hostname: development-zookeeper
-    restart: unless-stopped
-    ports:
-      - '2181:2181'
-    volumes:
-      - 'zookeeper_data:/data'
-      - 'zookeeper_datalog:/datalog'
-      - 'zookeeper_logs:/logs'
+      - 'redis-data:/data'
 
 volumes:
-  mysql_data:
+  mysql-data:
     name: development.mysql.data
     driver: local
-  redis_data:
+  redis-data:
     name: development.redis.data
-    driver: local
-  rabbitmq_data:
-    name: development.rabbitmq.data
-    driver: local
-  zookeeper_data:
-    name: development.zookeeper.data
-    driver: local
-  zookeeper_datalog:
-    name: development.zookeeper.datalog
-    driver: local
-  zookeeper_logs:
-    name: development.zookeeper.logs
     driver: local
 ```
 
